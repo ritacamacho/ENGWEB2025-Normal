@@ -1,0 +1,28 @@
+block content
+    doctype html
+    html
+        head
+            meta(charset="UTF-8")
+            link(rel="icon", href="favicon.png")
+            link(rel="stylesheet", href="/w3.css")
+            title Eurovisão - Edições
+        body
+            .w3-container
+                .w3-card-4.w3-margin
+                    .w3-container.w3-blue
+                        h2 Lista de Edições da Eurovisão
+
+                    table.w3-table-all.w3-hoverable
+                        thead
+                            tr
+                                th ID Edição
+                                th Ano Edição
+                                th País Organizador
+                                th País Vencedor
+                        tbody
+                            each edicao in edicoes
+                                tr
+                                    td= edicao._id
+                                    td= edicao.objectoContrato
+                                    td = edicao.paisOrganizador
+                                    td = edicao.paisVencedor

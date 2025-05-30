@@ -1,0 +1,22 @@
+
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./ex1
+      dockerfile: Dockerfile
+    ports:
+      - "25000:25000"
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    depends_on:
+      - mongo-seed
+  mongo-seed:
+    image: mongo:latest
+    volumes:
+      - ./new_dataset.json:/datasets/new_dataset.json
+    command: mongoimport --host mongodb -d eurovisao -c edicoes --type json --file /datasets/new_dataset.json --jsonArray

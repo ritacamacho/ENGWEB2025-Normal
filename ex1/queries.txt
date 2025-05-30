@@ -1,0 +1,32 @@
+1 -
+db.edicoes.countDocuments()
+
+2 -
+db.edicoes.countDocuments({ organizacao: "Ireland" })
+
+3 -
+db.edicoes.aggregate([
+  { $unwind: "$musicas" },
+  { $group: { _id: "$musicas.intérprete" } },
+  { $sort: { _id: 1 } }
+])
+
+4 -
+db.edicoes.aggregate([
+  {
+    $project: {
+      _id: 1,
+      numeroMusicas: { $size: "$musicas" }
+    }
+  }
+])
+
+5 -
+db.edicoes.aggregate([
+  {
+    $group: {
+      _id: "$organizacao",
+      totalVitorias: { $sum: 1 }
+    }
+  }
+])
